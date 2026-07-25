@@ -1,8 +1,5 @@
 'use client';
 
-import { Modal, Stack, Text, Button, Group } from '@mantine/core';
-import { IconCheck } from '@tabler/icons-react';
-
 interface SuccessModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -10,79 +7,50 @@ interface SuccessModalProps {
 }
 
 export function SuccessModal({ isOpen, onClose, message = 'Thank you!' }: SuccessModalProps) {
-  return (
-    <Modal
-      opened={isOpen}
-      onClose={onClose}
-      centered
-      size="sm"
-      withCloseButton={false}
-      styles={{
-        content: {
-          background: 'white',
-        },
-      }}
-    >
-      <Stack align="center" gap="lg" py="xl">
-        <div
-          style={{
-            width: '80px',
-            height: '80px',
-            background: '#D4EDDA',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            animation: 'scale-in 0.5s ease-out',
-          }}
-        >
-          <IconCheck size={48} color="#28A745" strokeWidth={2} />
-        </div>
+  if (!isOpen) return null;
 
-        <Stack gap="sm" align="center">
-          <Text
-            size="xl"
-            fw={700}
-            style={{ color: '#1a1a1a', textAlign: 'center' }}
-          >
-            Message Received!
-          </Text>
-          <Text
-            size="md"
+  return (
+    <>
+      <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} />
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm z-50 bg-white rounded-xl shadow-xl p-8">
+        <div className="flex flex-col items-center gap-6">
+          <div
+            className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center animate-scale-in"
             style={{
-              color: '#666',
-              textAlign: 'center',
-              maxWidth: '300px',
+              animation: 'scale-in 0.5s ease-out',
             }}
           >
-            {message}
-          </Text>
-        </Stack>
+            <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
 
-        <Button
-          onClick={onClose}
-          style={{
-            background: '#E8621B',
-            borderRadius: '8px',
-          }}
-          fullWidth
-        >
-          Close
-        </Button>
-      </Stack>
+          <div className="text-center">
+            <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">Message Received!</h3>
+            <p className="text-[#8b7d70] max-w-xs">{message}</p>
+          </div>
 
-      <style>{`
-        @keyframes scale-in {
-          from {
-            transform: scale(0.8);
-            opacity: 0;
+          <button
+            onClick={onClose}
+            className="w-full py-2 bg-[#E8621B] text-white font-medium rounded-lg hover:bg-[#d14513] transition-colors mt-2"
+          >
+            Close
+          </button>
+        </div>
+
+        <style>{`
+          @keyframes scale-in {
+            from {
+              transform: scale(0.8);
+              opacity: 0;
+            }
+            to {
+              transform: scale(1);
+              opacity: 1;
+            }
           }
-          to {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-      `}</style>
-    </Modal>
+        `}</style>
+      </div>
+    </>
   );
 }

@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { HeroSection } from '@/components/HeroSection';
-import { FeaturesSection } from '@/components/FeaturesSection';
-import { AnonymousMessageSection } from '@/components/AnonymousMessageSection';
+import { ModernHero } from '@/components/ModernHero';
+import { FeaturesGrid } from '@/components/FeaturesGrid';
+import { FeedbackSection } from '@/components/FeedbackSection';
 import { ContactFormModal } from '@/components/ContactFormModal';
 import { SuccessModal } from '@/components/SuccessModal';
-import { Footer } from '@/components/Footer';
+import { ModernNavigation } from '@/components/ModernNavigation';
 
 export default function Home() {
   const [contactModalOpen, setContactModalOpen] = useState(false);
@@ -22,16 +22,17 @@ export default function Home() {
     setSuccessModalOpen(true);
   };
 
-  const handleMessageSuccess = () => {
-    setSuccessMessage('Thank you for your feedback! We appreciate your input.');
+  const handleFeedbackSuccess = () => {
+    setSuccessMessage('Thank you for your feedback!');
     setSuccessModalOpen(true);
   };
 
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <HeroSection onContactClick={handleContactClick} />
-      <FeaturesSection />
-      <AnonymousMessageSection onSuccess={handleMessageSuccess} />
+    <main className="flex flex-col min-h-screen">
+      <ModernNavigation onContactClick={handleContactClick} />
+      <ModernHero onContactClick={handleContactClick} />
+      <FeaturesGrid />
+      <FeedbackSection onSuccess={handleFeedbackSuccess} />
       <ContactFormModal
         isOpen={contactModalOpen}
         onClose={() => setContactModalOpen(false)}
@@ -42,7 +43,6 @@ export default function Home() {
         onClose={() => setSuccessModalOpen(false)}
         message={successMessage}
       />
-      <Footer />
     </main>
   );
 }

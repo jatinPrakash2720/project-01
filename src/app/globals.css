@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #faf7f3;
   --foreground: #1a1a1a;
   --primary: #E8621B;
-  --primary-light: #FFE8DC;
-  --secondary: #f5f5f5;
+  --primary-dark: #d14513;
+  --secondary: #f5f1eb;
+  --border: #e5dcd3;
+  --text-muted: #8b7d70;
 }
 
 @theme inline {
@@ -42,6 +44,24 @@ main {
   min-height: 100vh;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+}
+
+p {
+  line-height: 1.6;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -52,10 +72,10 @@ main {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ddd;
+  background: #d4cfc5;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #bbb;
+  background: #c4bfb5;
 }

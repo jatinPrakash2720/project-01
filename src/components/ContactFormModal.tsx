@@ -1,16 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Modal,
-  TextInput,
-  Textarea,
-  Button,
-  Stack,
-  Group,
-  Select,
-} from '@mantine/core';
-import { IconPhone, IconMail, IconUser, IconBriefcase } from '@tabler/icons-react';
 
 interface ContactFormModalProps {
   isOpen: boolean;
@@ -37,7 +27,6 @@ export function ContactFormModal({ isOpen, onClose, onSuccess }: ContactFormModa
   const handleSubmit = () => {
     if (formData.name && formData.email && formData.phone) {
       setIsLoading(true);
-      // Simulate form submission
       setTimeout(() => {
         setFormData({ name: '', email: '', phone: '', profession: '' });
         setIsLoading(false);
@@ -47,117 +36,87 @@ export function ContactFormModal({ isOpen, onClose, onSuccess }: ContactFormModa
     }
   };
 
-  const professions = [
-    { value: 'student', label: 'Student' },
-    { value: 'professional', label: 'Professional' },
-    { value: 'business_owner', label: 'Business Owner' },
-    { value: 'healthcare', label: 'Healthcare' },
-    { value: 'agriculture', label: 'Agriculture' },
-    { value: 'other', label: 'Other' },
-  ];
-
   const isFormValid = formData.name && formData.email && formData.phone;
 
+  if (!isOpen) return null;
+
   return (
-    <Modal
-      opened={isOpen}
-      onClose={onClose}
-      title="Get In Touch"
-      centered
-      size="md"
-      styles={{
-        title: {
-          fontSize: '24px',
-          fontWeight: 700,
-          color: '#1a1a1a',
-        },
-      }}
-    >
-      <Stack gap="md">
-        <TextInput
-          label="Full Name"
-          placeholder="Your name"
-          value={formData.name}
-          onChange={(e) => handleChange('name', e.currentTarget.value)}
-          icon={<IconUser size={18} />}
-          required
-          styles={{
-            label: { fontWeight: 600, color: '#333' },
-            input: { borderRadius: '8px' },
-          }}
-        />
+    <>
+      <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} />
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50 bg-white rounded-xl shadow-xl p-8">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-[#1a1a1a]">Get In Touch</h2>
+          <p className="text-[#8b7d70] mt-1">We'd love to hear from you</p>
+        </div>
 
-        <TextInput
-          label="Email Address"
-          placeholder="your@email.com"
-          value={formData.email}
-          onChange={(e) => handleChange('email', e.currentTarget.value)}
-          icon={<IconMail size={18} />}
-          required
-          type="email"
-          styles={{
-            label: { fontWeight: 600, color: '#333' },
-            input: { borderRadius: '8px' },
-          }}
-        />
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">Full Name</label>
+            <input
+              type="text"
+              placeholder="Your name"
+              value={formData.name}
+              onChange={(e) => handleChange('name', e.currentTarget.value)}
+              className="w-full px-4 py-2 border border-[#e5dcd3] rounded-lg focus:outline-none focus:border-[#E8621B] text-[#1a1a1a] placeholder-[#8b7d70]"
+            />
+          </div>
 
-        <TextInput
-          label="Phone Number"
-          placeholder="+91 (555) 000-0000"
-          value={formData.phone}
-          onChange={(e) => handleChange('phone', e.currentTarget.value)}
-          icon={<IconPhone size={18} />}
-          required
-          styles={{
-            label: { fontWeight: 600, color: '#333' },
-            input: { borderRadius: '8px' },
-          }}
-        />
+          <div>
+            <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">Email Address</label>
+            <input
+              type="email"
+              placeholder="your@email.com"
+              value={formData.email}
+              onChange={(e) => handleChange('email', e.currentTarget.value)}
+              className="w-full px-4 py-2 border border-[#e5dcd3] rounded-lg focus:outline-none focus:border-[#E8621B] text-[#1a1a1a] placeholder-[#8b7d70]"
+            />
+          </div>
 
-        <Select
-          label="Profession"
-          placeholder="Select your profession"
-          value={formData.profession}
-          onChange={(value) => handleChange('profession', value || '')}
-          data={professions}
-          icon={<IconBriefcase size={18} />}
-          styles={{
-            label: { fontWeight: 600, color: '#333' },
-            input: { borderRadius: '8px' },
-          }}
-        />
+          <div>
+            <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">Phone Number</label>
+            <input
+              type="tel"
+              placeholder="+91 (555) 000-0000"
+              value={formData.phone}
+              onChange={(e) => handleChange('phone', e.currentTarget.value)}
+              className="w-full px-4 py-2 border border-[#e5dcd3] rounded-lg focus:outline-none focus:border-[#E8621B] text-[#1a1a1a] placeholder-[#8b7d70]"
+            />
+          </div>
 
-        <Textarea
-          label="Message (Optional)"
-          placeholder="Tell us more about what you'd like to discuss"
-          minRows={3}
-          styles={{
-            label: { fontWeight: 600, color: '#333' },
-            input: { borderRadius: '8px' },
-          }}
-        />
+          <div>
+            <label className="block text-sm font-semibold text-[#1a1a1a] mb-2">Profession</label>
+            <select
+              value={formData.profession}
+              onChange={(e) => handleChange('profession', e.currentTarget.value)}
+              className="w-full px-4 py-2 border border-[#e5dcd3] rounded-lg focus:outline-none focus:border-[#E8621B] text-[#1a1a1a]"
+            >
+              <option value="">Select your profession</option>
+              <option value="student">Student</option>
+              <option value="professional">Professional</option>
+              <option value="business">Business Owner</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="agriculture">Agriculture</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-        <Group justify="flex-end" mt="lg">
-          <Button
-            variant="default"
-            onClick={onClose}
-            style={{ borderRadius: '8px' }}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            disabled={!isFormValid || isLoading}
-            loading={isLoading}
-            style={{
-              background: '#E8621B',
-              borderRadius: '8px',
-            }}
-          >
-            Send Message
-          </Button>
-        </Group>
-      </Stack>
-    </Modal>
+          <div className="flex justify-end gap-3 mt-6">
+            <button
+              onClick={onClose}
+              className="px-6 py-2 border border-[#e5dcd3] rounded-lg text-[#1a1a1a] font-medium hover:bg-[#f5f1eb] transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              disabled={!isFormValid || isLoading}
+              className="px-6 py-2 bg-[#E8621B] text-white font-medium rounded-lg hover:bg-[#d14513] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? 'Sending...' : 'Send'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
