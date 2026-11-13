@@ -50,57 +50,37 @@ export default function VisionSection() {
       id="vision"
       className="scroll-section section-pad"
       style={{
-        background: '#FEF3DD',
-        padding: '100px 40px',
+        background: 'var(--white)',
+        padding: '80px 40px',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Top decorative */}
       <div
         style={{
           position: 'absolute',
           top: 0,
-          left: 0,
-          right: 0,
-          height: '4px',
-          background: 'linear-gradient(90deg, transparent, #F5821F, #FF6B2C, transparent)',
+          left: '10%',
+          right: '10%',
+          height: '1px',
+          background: 'linear-gradient(90deg, transparent, rgba(252, 163, 17, 0.35), transparent)',
         }}
       />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Vision quote */}
         <div
           className="animate-when-visible"
           style={{
             textAlign: 'center',
-            marginBottom: '80px',
+            marginBottom: '64px',
           }}
         >
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '6px 16px',
-              borderRadius: '50px',
-              background: 'rgba(245, 130, 31, 0.1)',
-              border: '1px solid rgba(245, 130, 31, 0.25)',
-              marginBottom: '28px',
-            }}
-          >
-            <span style={{ fontSize: '14px', color: '#F5821F', fontWeight: 600 }}>Our Vision</span>
-          </div>
+          <p className="section-eyebrow">Our Vision</p>
           <h2
-            className="animate-when-visible delay-100"
+            className="animate-when-visible delay-100 section-heading"
             style={{
-              fontFamily: 'Sora, Inter, sans-serif',
-              fontSize: 'clamp(32px, 4.5vw, 56px)',
-              fontWeight: 800,
-              color: '#1C0F00',
-              letterSpacing: '-0.03em',
-              lineHeight: 1.15,
-              maxWidth: '800px',
+              fontSize: 'clamp(32px, 4.5vw, 52px)',
+              maxWidth: '760px',
               margin: '0 auto 24px',
             }}
           >
@@ -110,10 +90,10 @@ export default function VisionSection() {
           <p
             className="animate-when-visible delay-200"
             style={{
-              fontSize: '17px',
-              color: '#6B3D1A',
+              fontSize: '16px',
+              color: 'var(--prussian-blue)',
               lineHeight: 1.75,
-              maxWidth: '600px',
+              maxWidth: '560px',
               margin: '0 auto',
             }}
           >
@@ -122,43 +102,51 @@ export default function VisionSection() {
           </p>
         </div>
 
-        {/* USP Cards */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
             gap: '16px',
-            marginBottom: '80px',
           }}
         >
           {usps.map((usp, i) => (
             <div
               key={usp.title}
               className="animate-card-rise dark-card"
-              style={{ animationDelay: `${i * 0.08}s` }}
+              style={{
+                animationDelay: `${i * 0.08}s`,
+                padding: '28px 24px',
+              }}
             >
+              <div
+                style={{
+                  width: 24,
+                  height: 2,
+                  background: 'var(--orange)',
+                  marginBottom: '20px',
+                  borderRadius: 1,
+                  opacity: 0.7,
+                }}
+              />
               <h3
                 style={{
                   fontSize: '18px',
                   fontWeight: 700,
-                  color: '#1C0F00',
-                  marginBottom: '8px',
-                  fontFamily: 'Sora, sans-serif',
+                  color: 'var(--prussian-blue)',
+                  marginBottom: '10px',
+                  fontFamily: 'var(--font-display)',
+                  letterSpacing: '-0.02em',
                 }}
               >
                 {usp.title}
               </h3>
-              <p style={{ fontSize: '14px', color: 'rgba(90, 40, 0, 0.6)', lineHeight: 1.65 }}>
+              <p style={{ fontSize: '14px', color: 'rgba(20, 33, 61, 0.58)', lineHeight: 1.7 }}>
                 {usp.desc}
               </p>
             </div>
           ))}
         </div>
-
       </div>
-
     </section>
   );
 }
-
-

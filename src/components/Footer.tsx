@@ -5,8 +5,8 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
     <footer
       className="site-footer"
       style={{
-        background: '#2A0E00',
-        borderTop: '1px solid rgba(245, 130, 31, 0.1)',
+        background: 'var(--prussian-blue)',
+        borderTop: '1px solid rgba(252, 163, 17, 0.1)',
         padding: '60px 40px 40px',
         position: 'relative',
         overflow: 'hidden',
@@ -21,10 +21,17 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
           transform: 'translateX(-50%)',
           width: '500px',
           height: '200px',
-          background: 'radial-gradient(ellipse, rgba(245, 130, 31, 0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse, rgba(252, 163, 17, 0.06) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
+
+      {/* Three corner circles — bottom-left */}
+      <div className="footer-orbs" aria-hidden="true">
+        <span className="footer-orb" />
+        <span className="footer-orb" />
+        <span className="footer-orb" />
+      </div>
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         <div
@@ -45,9 +52,10 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
                 justifyContent: 'center',
                 marginBottom: '16px',
                 padding: '10px 16px',
-                borderRadius: '16px',
-                background: '#FEF3DD',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+                borderRadius: 'var(--radius-surface)',
+                background: 'var(--white)',
+                boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
+                border: '1px solid rgba(252, 163, 17, 0.12)',
               }}
             >
               <img
@@ -61,7 +69,7 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
             <p
               style={{
                 fontSize: '14px',
-                color: 'rgba(255,200,130,0.45)',
+                color: 'rgba(229, 229, 229,0.45)',
                 lineHeight: 1.75,
                 maxWidth: '300px',
                 marginBottom: '24px',
@@ -73,7 +81,7 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
             </p>
             <div style={{ display: 'flex', gap: '12px' }}>
               <div className="status-badge status-coming" style={{ fontSize: '11px' }}>
-                <div className="glow-dot" style={{ width: 5, height: 5, background: '#F5821F' }} />
+                <div className="glow-dot" style={{ width: 5, height: 5, background: 'var(--orange)' }} />
                 App launching soon
               </div>
             </div>
@@ -85,7 +93,7 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
               style={{
                 fontSize: '13px',
                 fontWeight: 700,
-                color: 'rgba(255,200,130,0.5)',
+                color: 'rgba(229, 229, 229,0.5)',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 marginBottom: '20px',
@@ -104,7 +112,7 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
                     transition: 'color 0.2s ease',
                   }}
                   onMouseEnter={(e) => {
-                    (e.target as HTMLSpanElement).style.color = '#F5821F';
+                    (e.target as HTMLSpanElement).style.color = 'var(--orange)';
                   }}
                   onMouseLeave={(e) => {
                     (e.target as HTMLSpanElement).style.color = 'rgba(255,248,238,0.5)';
@@ -122,7 +130,7 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
               style={{
                 fontSize: '13px',
                 fontWeight: 700,
-                color: 'rgba(255,200,130,0.5)',
+                color: 'rgba(229, 229, 229,0.5)',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
                 marginBottom: '20px',
@@ -153,7 +161,7 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
                     }
                   }}
                   onMouseEnter={(e) => {
-                    (e.target as HTMLButtonElement).style.color = '#F5821F';
+                    (e.target as HTMLButtonElement).style.color = 'var(--orange)';
                   }}
                   onMouseLeave={(e) => {
                     (e.target as HTMLButtonElement).style.color = 'rgba(255,248,238,0.5)';
@@ -166,11 +174,12 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom bar — left padding clears the corner orbs */}
         <div
           style={{
             paddingTop: '28px',
-            borderTop: '1px solid rgba(245, 130, 31, 0.08)',
+            paddingLeft: '96px',
+            borderTop: '1px solid rgba(252, 163, 17, 0.08)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -178,10 +187,10 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
             gap: '16px',
           }}
         >
-          <p style={{ fontSize: '12px', color: 'rgba(255,200,130,0.3)' }}>
+          <p style={{ fontSize: '12px', color: 'rgba(229, 229, 229,0.3)' }}>
             © 2025 MurliMadhav. All rights reserved.
           </p>
-          <span style={{ fontSize: '12px', color: 'rgba(255,200,130,0.3)' }}>
+          <span style={{ fontSize: '12px', color: 'rgba(229, 229, 229,0.3)' }}>
             Freshness Guaranteed
           </span>
         </div>

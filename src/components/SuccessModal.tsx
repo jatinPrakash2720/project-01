@@ -26,13 +26,13 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             width: '80px',
             height: '80px',
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(46, 204, 113, 0.1))',
-            border: '2px solid rgba(46, 204, 113, 0.4)',
+            background: 'linear-gradient(135deg, rgba(252, 163, 17, 0.2), rgba(252, 163, 17, 0.1))',
+            border: '2px solid rgba(252, 163, 17, 0.4)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '36px',
-            color: '#2ECC71',
+            color: 'var(--orange)',
             fontWeight: 700,
             margin: '0 auto 24px',
             animation: 'scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both',
@@ -43,10 +43,10 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
 
         <h3
           style={{
-            fontFamily: 'Sora, Inter, sans-serif',
+            fontFamily: 'var(--font-display)',
             fontSize: '26px',
             fontWeight: 800,
-            color: '#FEF3DD',
+            color: 'var(--white)',
             letterSpacing: '-0.02em',
             marginBottom: '12px',
           }}
@@ -56,7 +56,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
         <p
           style={{
             fontSize: '15px',
-            color: 'rgba(255, 200, 130, 0.6)',
+            color: 'rgba(229, 229, 229, 0.6)',
             lineHeight: 1.7,
             marginBottom: '32px',
           }}
@@ -69,9 +69,9 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
         <div
           style={{
             padding: '16px 24px',
-            background: 'rgba(245, 130, 31, 0.08)',
-            border: '1px solid rgba(245, 130, 31, 0.2)',
-            borderRadius: '14px',
+            background: 'rgba(252, 163, 17, 0.08)',
+            border: '1px solid rgba(252, 163, 17, 0.2)',
+            borderRadius: 'var(--radius-surface)',
             marginBottom: '28px',
             display: 'flex',
             alignItems: 'center',
@@ -79,7 +79,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             gap: '12px',
           }}
         >
-          <span style={{ fontSize: '14px', color: 'rgba(255,200,130,0.7)', fontWeight: 500 }}>
+          <span style={{ fontSize: '14px', color: 'rgba(229, 229, 229,0.7)', fontWeight: 500 }}>
             Fresh dairy experiences coming your way soon!
           </span>
         </div>

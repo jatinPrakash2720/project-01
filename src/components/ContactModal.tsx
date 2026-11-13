@@ -198,7 +198,7 @@ export default function ContactModal({ isOpen, onClose, onSuccess }: ContactModa
         </div>
 
         {error ? (
-          <p style={{ marginTop: '12px', fontSize: '13px', color: '#C62828' }}>{error}</p>
+          <p style={{ marginTop: '12px', fontSize: '13px', color: 'var(--brandy)' }}>{error}</p>
         ) : null}
 
         <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>

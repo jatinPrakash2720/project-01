@@ -6,6 +6,7 @@ import HeroSection from "@/components/HeroSection"
 import ProductsSection from "@/components/ProductsSection"
 import HowItWorksSection from "@/components/HowItWorksSection"
 import VisionSection from "@/components/VisionSection"
+import TeamSectionDemo from "@/components/ui/demo"
 import AnonMessageSection from "@/components/AnonMessageSection"
 import ContactModal from "@/components/ContactModal"
 import SuccessModal from "@/components/SuccessModal"
@@ -25,17 +26,29 @@ export default function Home() {
 
   return (
     <>
-      <Navbar onContactClick={openContact} />
+      <div className="page-frame">
+        <div className="page-shell">
+          <Navbar onContactClick={openContact} />
 
-      <main>
-        <HeroSection onContactClick={openContact} />
-        <ProductsSection />
-        <HowItWorksSection />
-        <VisionSection />
-        <AnonMessageSection onSuccess={handleSuccess} />
-      </main>
+          <div className="page-main-wrap">
+            <div className="design-orbs" aria-hidden="true">
+              <span className="design-orb" />
+              <span className="design-orb" />
+              <span className="design-orb" />
+            </div>
 
-      <Footer onContactClick={openContact} />
+            <main className="page-main">
+              <HeroSection onContactClick={openContact} />
+              <ProductsSection />
+              <HowItWorksSection />
+              <VisionSection />
+              <TeamSectionDemo />
+              <AnonMessageSection onSuccess={handleSuccess} />
+              <Footer onContactClick={openContact} />
+            </main>
+          </div>
+        </div>
+      </div>
 
       <ContactModal
         isOpen={contactOpen}

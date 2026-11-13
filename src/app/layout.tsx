@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   },
 };
 
-/** Browser chrome / mobile address bar — matches navbar warm cream */
+/** Browser chrome / mobile address bar — alabaster canvas */
 export const viewport: Viewport = {
-  themeColor: '#FFFDF9',
+  themeColor: '#E5E5E5',
   colorScheme: 'light',
 };
 
@@ -35,7 +35,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body style={{ margin: 0, padding: 0, background: '#FFFDF9' }}>{children}</body>
+      <body style={{ margin: 0, padding: 0, background: 'var(--alabaster-grey)' }}>{children}</body>
     </html>
   );
 }

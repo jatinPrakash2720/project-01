@@ -25,6 +25,10 @@
 *.pem
 .superpowers/
 
+# Local Cursor / agent tooling (not part of the app)
+.cursor/
+AGENTS.md
+
 # debug
 npm-debug.log*
 yarn-debug.log*

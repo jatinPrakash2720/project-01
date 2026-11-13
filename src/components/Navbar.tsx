@@ -1,154 +1,136 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
+import { Button } from "@/components/ui/button"
+import { MobileNav } from "@/components/ui/navbar"
+import { cn } from "@/lib/utils"
 
 interface NavbarProps {
   onContactClick: () => void
 }
 
+const navigationLinks = [
+  {
+    name: "Menu",
+    items: [
+      { href: "#about", label: "About" },
+      { href: "#products", label: "Products" },
+      { href: "#how-it-works", label: "How It Works" },
+      { href: "#vision", label: "Vision" },
+      { href: "#team", label: "Team" },
+    ],
+  },
+]
+
 export default function Navbar({ onContactClick }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const lastY = useRef(0)
+  const ticking = useRef(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    lastY.current = window.scrollY
+
+    const update = () => {
+      const y = Math.max(window.scrollY, 0)
+
+      // At the top, always use the large-gap resting state (image 2)
+      if (y <= 8) {
+        setScrolled(false)
+        setHidden(false)
+        lastY.current = y
+        ticking.current = false
+        return
+      }
+
+      setScrolled(y > 40)
+
+      // Hide once user scrolls down; only reveal again at the very top
+      const delta = y - lastY.current
+      if (delta > 6) {
+        setHidden(true)
+      }
+
+      lastY.current = y
+      ticking.current = false
+    }
+
+    const onScroll = () => {
+      if (ticking.current) return
+      ticking.current = true
+      window.requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (href: string) => {
+    const id = href.startsWith("#") ? href.slice(1) : href
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const navItems = ["About", "Products", "How It Works", "Vision"]
-
-  // Navbar bottom border aligns with the flute; pot hangs below
-  const LOGO_HEIGHT = 96
-  const FLUTE_RATIO = 0.59
-  const TOP_PAD = 10
-  const logoLayoutHeight = Math.round(LOGO_HEIGHT * FLUTE_RATIO-2)
-
   return (
     <>
-      <style>{`
-        .nav-links-desktop { display: flex; }
-        .nav-cta-desktop { display: flex; }
-        .nav-logo-link { margin: 0; }
-
-        @media (max-width: 768px) {
-          .nav-links-desktop { display: none !important; }
-          .nav-cta-desktop { display: none !important; }
-          .navbar-mobile-center {
-            justify-content: center !important;
-          }
-          .nav-logo-link {
-            margin: 0 auto !important;
-          }
-        }
-      `}</style>
+      {/* Keeps hero gap stable — fixed nav no longer steals layout space */}
+      <div className="navbar-spacer" aria-hidden="true" />
 
       <nav
-        className="navbar navbar-mobile-center"
-        style={{
-          background: scrolled
-            ? "rgba(255, 253, 249, 0.98)"
-            : "rgba(255, 253, 249, 0.85)",
-          padding: `${TOP_PAD}px 24px 0`,
-          flexWrap: "nowrap",
-          alignItems: "stretch",
-          boxShadow: scrolled ? "0 2px 20px rgba(45, 18, 0, 0.1)" : "none",
-          overflow: "visible",
-        }}
+        className={cn(
+          "navbar",
+          scrolled && "navbar-scrolled",
+          hidden && "navbar-hidden",
+        )}
+        aria-label="Primary"
       >
-        <a
-          href="#about"
-          className="nav-logo-link"
-          onClick={(e) => {
-            e.preventDefault()
-            scrollTo("about")
-          }}
-          style={{
-            position: "relative",
-            display: "block",
-            flexShrink: 0,
-            width: Math.round(LOGO_HEIGHT * (102 / 56)),
-            height: logoLayoutHeight,
-            textDecoration: "none",
-            overflow: "visible",
-            zIndex: 2,
-          }}
-          aria-label="MurliMadhav home"
-        >
-          <img
-            src="/logo.svg"
-            alt="MurliMadhav"
-            width={102}
-            height={56}
-            style={{
-              height: LOGO_HEIGHT,
-              width: "auto",
-              display: "block",
-              position: "absolute",
-              left: 0,
-              top: 0,
-              pointerEvents: "none",
-            }}
-          />
-        </a>
+        <div className="navbar-inner">
+          <div className="navbar-left">
+            <MobileNav nav={navigationLinks} onNavigate={scrollTo} />
 
-        <div
-          className="nav-links-desktop"
-          style={{
-            alignItems: "center",
-            alignSelf: "stretch",
-            height: logoLayoutHeight,
-            gap: "28px",
-          }}
-        >
-          {navItems.map((item) => (
-            <button
-              key={item}
-              onClick={() => scrollTo(item.toLowerCase().replace(/\s+/g, "-"))}
-              style={{
-                background: "none",
-                border: "none",
-                color: "#5A2800",
-                fontSize: "14px",
-                fontWeight: 600,
-                cursor: "pointer",
-                transition: "color 0.2s ease",
-                padding: "4px 0",
-                whiteSpace: "nowrap",
+            <a
+              href="#about"
+              className="navbar-logo"
+              onClick={(e) => {
+                e.preventDefault()
+                scrollTo("#about")
               }}
-              onMouseEnter={(e) => {
-                ;(e.target as HTMLButtonElement).style.color = "#F5821F"
-              }}
-              onMouseLeave={(e) => {
-                ;(e.target as HTMLButtonElement).style.color = "#5A2800"
-              }}
+              aria-label="MurliMadhav home"
             >
-              {item}
-            </button>
-          ))}
-        </div>
+              {/* Full logo hangs below the flute line into the hero */}
+              <img
+                src="/logo.svg"
+                alt="MurliMadhav"
+                width={175}
+                height={96}
+                className="navbar-logo-img"
+              />
+            </a>
+          </div>
 
-        <div
-          className="nav-cta-desktop"
-          style={{
-            alignItems: "center",
-            alignSelf: "stretch",
-            height: logoLayoutHeight,
-            gap: "12px",
-            flexShrink: 0,
-          }}
-        >
-          <button
-            className="pill-btn pill-primary"
-            onClick={onContactClick}
-            id="navbar-contact-btn"
-            style={{ whiteSpace: "nowrap" }}
-          >
-            Contact Us
-          </button>
+          <div className="navbar-links">
+            {navigationLinks[0].items.map((link) => (
+              <button
+                key={link.href}
+                type="button"
+                className="navbar-link"
+                onClick={() => scrollTo(link.href)}
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="navbar-right">
+            <Button
+              id="navbar-contact-btn"
+              type="button"
+              className="pill-btn pill-primary navbar-cta"
+              onClick={onContactClick}
+            >
+              Contact Us
+            </Button>
+          </div>
         </div>
       </nav>
     </>

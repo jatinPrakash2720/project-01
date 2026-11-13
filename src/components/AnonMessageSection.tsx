@@ -37,8 +37,8 @@ export default function AnonMessageSection({ onSuccess }: AnonMessageSectionProp
       id="message"
       className="scroll-section section-pad"
       style={{
-        background: '#FEF3DD',
-        padding: '100px 40px',
+        background: 'var(--white)',
+        padding: '80px 40px',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -49,9 +49,9 @@ export default function AnonMessageSection({ onSuccess }: AnonMessageSectionProp
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '700px',
-          height: '400px',
-          background: 'radial-gradient(ellipse, rgba(245, 130, 31, 0.08) 0%, transparent 70%)',
+          width: '640px',
+          height: '360px',
+          background: 'radial-gradient(ellipse, rgba(252, 163, 17, 0.07) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
@@ -65,28 +65,11 @@ export default function AnonMessageSection({ onSuccess }: AnonMessageSectionProp
         }}
       >
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '6px 16px',
-              borderRadius: '50px',
-              background: 'rgba(245, 130, 31, 0.1)',
-              border: '1px solid rgba(245, 130, 31, 0.25)',
-              marginBottom: '24px',
-            }}
-          >
-            <span style={{ fontSize: '14px', color: '#F5821F', fontWeight: 600 }}>Anonymous Feedback</span>
-          </div>
+          <p className="section-eyebrow">Anonymous Feedback</p>
           <h2
+            className="section-heading"
             style={{
-              fontFamily: 'Sora, Inter, sans-serif',
-              fontSize: 'clamp(32px, 4.5vw, 52px)',
-              fontWeight: 800,
-              color: '#1C0F00',
-              letterSpacing: '-0.03em',
-              lineHeight: 1.1,
+              fontSize: 'clamp(32px, 4.5vw, 48px)',
               marginBottom: '16px',
             }}
           >
@@ -96,9 +79,9 @@ export default function AnonMessageSection({ onSuccess }: AnonMessageSectionProp
           <p
             style={{
               fontSize: '16px',
-              color: 'rgba(90, 40, 0, 0.55)',
+              color: 'rgba(20, 33, 61, 0.55)',
               lineHeight: 1.7,
-              maxWidth: '500px',
+              maxWidth: '480px',
               margin: '0 auto',
             }}
           >
@@ -109,17 +92,14 @@ export default function AnonMessageSection({ onSuccess }: AnonMessageSectionProp
 
         <div
           style={{
-            background: 'rgba(255, 255, 255, 0.55)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.85)',
-            borderTop: '2px solid rgba(245, 130, 31, 0.3)',
-            borderRadius: '28px',
+            background: 'rgba(255, 253, 249, 0.75)',
+            border: '1px solid rgba(20, 33, 61, 0.08)',
+            borderRadius: 'var(--radius-surface)',
             padding: '40px',
-            boxShadow: '0 8px 40px rgba(180, 100, 20, 0.08), inset 0 1px 0 rgba(255,255,255,0.8)',
+            boxShadow: '0 2px 16px rgba(20, 33, 61, 0.04)',
           }}
         >
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '24px' }}>
             <label className="form-label" htmlFor="anon-message">
               Your Message
             </label>
@@ -133,13 +113,13 @@ export default function AnonMessageSection({ onSuccess }: AnonMessageSectionProp
               style={{
                 resize: 'vertical',
                 minHeight: '120px',
-                fontFamily: 'Inter, sans-serif',
+                fontFamily: 'var(--font-body)',
               }}
             />
           </div>
 
           {error ? (
-            <p style={{ marginBottom: '12px', fontSize: '13px', color: '#C62828' }}>{error}</p>
+            <p style={{ marginBottom: '16px', fontSize: '13px', color: 'var(--black)' }}>{error}</p>
           ) : null}
 
           <div
@@ -151,7 +131,7 @@ export default function AnonMessageSection({ onSuccess }: AnonMessageSectionProp
               gap: '16px',
             }}
           >
-            <p style={{ fontSize: '12px', color: 'rgba(90, 40, 0, 0.4)', maxWidth: '320px' }}>
+            <p style={{ fontSize: '12px', color: 'rgba(20, 33, 61, 0.4)', maxWidth: '320px' }}>
               Completely anonymous. We never collect your identity.
             </p>
             <button
@@ -166,30 +146,9 @@ export default function AnonMessageSection({ onSuccess }: AnonMessageSectionProp
               disabled={!canSubmit}
               onClick={handleSubmit}
             >
-              {submitting ? 'Sending…' : 'Send Message ✦'}
+              {submitting ? 'Sending…' : 'Send Message'}
             </button>
           </div>
-        </div>
-
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '8px',
-            marginTop: '32px',
-          }}
-        >
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: '50%',
-                background: i === 2 ? '#F5821F' : 'rgba(245, 130, 31, 0.2)',
-              }}
-            />
-          ))}
         </div>
       </div>
     </section>

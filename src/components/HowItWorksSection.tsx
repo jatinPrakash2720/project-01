@@ -7,25 +7,25 @@ const steps = [
     num: '01',
     title: 'Place Your Order',
     desc: 'Open the app, browse our fresh dairy catalog, choose your products and preferred delivery slot.',
-    color: '#F5821F',
+    color: 'var(--orange)',
   },
   {
     num: '02',
     title: 'Pay Digitally',
     desc: 'Secure prepaid payment via UPI, card, or wallet. No cash, no hassle — instant confirmation.',
-    color: '#E08C00',
+    color: 'var(--orange)',
   },
   {
     num: '03',
     title: 'We Prepare Fresh',
     desc: 'Your order enters our production cycle. Milk is sourced, packaged, and assigned to your delivery route.',
-    color: '#C97B10',
+    color: 'var(--prussian-blue)',
   },
   {
     num: '04',
     title: 'Delivered to You',
     desc: 'Your delivery partner drops off fresh dairy right at your door during your selected time slot.',
-    color: '#BA6E0E',
+    color: 'var(--prussian-blue)',
   },
 ];
 
@@ -77,8 +77,8 @@ export default function HowItWorksSection() {
       id="how-it-works"
       className="scroll-section how-section section-pad"
       style={{
-        background: 'linear-gradient(160deg, #FEF3DD 0%, #FDEAC4 100%)',
-        padding: '100px 40px',
+        background: 'linear-gradient(165deg, var(--white) 0%, var(--alabaster-grey) 100%)',
+        padding: '80px 40px',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -86,45 +86,26 @@ export default function HowItWorksSection() {
       <div
         style={{
           position: 'absolute',
-          top: '50%',
+          top: '40%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '600px',
-          height: '600px',
-          background: 'radial-gradient(circle, rgba(245, 130, 31, 0.06) 0%, transparent 70%)',
+          width: '560px',
+          height: '560px',
+          background: 'radial-gradient(circle, rgba(252, 163, 17, 0.05) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <div
-            className={`animate-when-visible ${revealed ? 'is-visible' : ''}`}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '6px 16px',
-              borderRadius: '50px',
-              background: 'rgba(245, 130, 31, 0.1)',
-              border: '1px solid rgba(245, 130, 31, 0.25)',
-              marginBottom: '20px',
-            }}
-          >
-            <span style={{ fontSize: '14px', color: '#F5821F', fontWeight: 600 }}>
-              How It Works
-            </span>
-          </div>
+        <div style={{ marginBottom: '64px', maxWidth: '640px' }}>
+          <p className={`animate-when-visible section-eyebrow ${revealed ? 'is-visible' : ''}`}>
+            How It Works
+          </p>
           <h2
-            className={`animate-when-visible ${revealed ? 'is-visible' : ''}`}
+            className={`animate-when-visible section-heading ${revealed ? 'is-visible' : ''}`}
             style={{
-              fontFamily: 'Sora, Inter, sans-serif',
-              fontSize: 'clamp(36px, 5vw, 60px)',
-              fontWeight: 800,
-              color: '#1C0F00',
-              letterSpacing: '-0.03em',
-              lineHeight: 1.1,
-              marginBottom: '20px',
+              fontSize: 'clamp(36px, 5vw, 56px)',
+              marginBottom: '16px',
               animationDelay: '0.1s',
             }}
           >
@@ -134,10 +115,8 @@ export default function HowItWorksSection() {
           <p
             className={`animate-when-visible ${revealed ? 'is-visible' : ''}`}
             style={{
-              maxWidth: '500px',
-              margin: '0 auto',
               fontSize: '16px',
-              color: 'rgba(90, 40, 0, 0.55)',
+              color: 'rgba(20, 33, 61, 0.55)',
               lineHeight: 1.7,
               animationDelay: '0.2s',
             }}
@@ -147,59 +126,72 @@ export default function HowItWorksSection() {
           </p>
         </div>
 
-        <div className="how-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div className="how-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '64px', alignItems: 'start' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              position: 'relative',
+              borderLeft: '1px solid rgba(252, 163, 17, 0.18)',
+              marginLeft: '11px',
+            }}
+          >
             {steps.map((step, i) => (
               <div
                 key={step.num}
                 className={`highlight-row animate-when-visible ${revealed ? 'is-visible' : ''} ${activeStep === i ? 'active' : ''}`}
-                style={{ animationDelay: `${0.3 + i * 0.12}s` }}
+                style={{
+                  animationDelay: `${0.3 + i * 0.12}s`,
+                  opacity: i <= activeStep ? 1 : 0.55,
+                }}
               >
                 <div
                   style={{
-                    width: '28px',
-                    height: '28px',
-                    flexShrink: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    position: 'absolute',
+                    left: '-8px',
+                    top: '28px',
+                    width: '15px',
+                    height: '15px',
+                    borderRadius: '50%',
+                    background: i <= activeStep ? 'var(--orange)' : 'var(--white)',
+                    border: i <= activeStep
+                      ? '2px solid var(--orange)'
+                      : '2px solid rgba(252, 163, 17, 0.35)',
+                    boxShadow: activeStep === i
+                      ? '0 0 0 4px rgba(252, 163, 17, 0.14)'
+                      : 'none',
+                    transition: 'background 220ms ease, border-color 220ms ease, box-shadow 220ms ease',
+                    zIndex: 2,
+                    transform: 'translateX(-50%)',
                   }}
-                >
-                  <div
-                    style={{
-                      width: activeStep === i ? '10px' : '8px',
-                      height: activeStep === i ? '10px' : '8px',
-                      borderRadius: '50%',
-                      background:
-                        i <= activeStep
-                          ? '#F5821F'
-                          : 'rgba(245, 130, 31, 0.3)',
-                      boxShadow:
-                        activeStep === i
-                          ? '0 0 0 4px rgba(245, 130, 31, 0.2)'
-                          : 'none',
-                      transition: 'all 0.3s ease',
-                    }}
-                  />
-                </div>
+                />
 
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '11px', color: step.color, fontWeight: 700, letterSpacing: '0.1em' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '8px' }}>
+                    <span
+                      style={{
+                        fontSize: '12px',
+                        color: step.color,
+                        fontWeight: 600,
+                        letterSpacing: '0.12em',
+                        fontFamily: 'var(--font-body)',
+                      }}
+                    >
                       {step.num}
                     </span>
                     <h3
                       style={{
-                        fontSize: '17px',
+                        fontSize: '20px',
                         fontWeight: 700,
-                        color: '#1C0F00',
-                        fontFamily: 'Sora, sans-serif',
+                        color: 'var(--prussian-blue)',
+                        fontFamily: 'var(--font-display)',
+                        letterSpacing: '-0.02em',
                       }}
                     >
                       {step.title}
                     </h3>
                   </div>
-                  <p style={{ fontSize: '14px', color: 'rgba(90, 40, 0, 0.55)', lineHeight: 1.65 }}>
+                  <p style={{ fontSize: '15px', color: 'rgba(20, 33, 61, 0.55)', lineHeight: 1.7, maxWidth: '440px' }}>
                     {step.desc}
                   </p>
                 </div>
@@ -211,20 +203,26 @@ export default function HowItWorksSection() {
             <div
               className={`delivery-journey animate-when-visible ${revealed ? 'is-visible' : ''}`}
               style={{
-                background: 'rgba(255, 255, 255, 0.55)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255, 255, 255, 0.8)',
-                borderTop: '2px solid rgba(245, 130, 31, 0.25)',
-                borderRadius: '24px',
+                background: 'rgba(255, 253, 249, 0.7)',
+                border: '1px solid rgba(20, 33, 61, 0.08)',
+                borderRadius: 'var(--radius-surface)',
                 padding: '32px',
-                marginBottom: '20px',
-                boxShadow: '0 4px 20px rgba(180, 100, 20, 0.07), inset 0 1px 0 rgba(255,255,255,0.9)',
+                marginBottom: '16px',
+                boxShadow: '0 2px 16px rgba(20, 33, 61, 0.04)',
                 animationDelay: '0.3s',
               }}
             >
-              <div style={{ fontSize: '13px', color: 'rgba(90, 40, 0, 0.45)', fontWeight: 600, marginBottom: '28px', letterSpacing: '0.05em' }}>
-                DELIVERY JOURNEY
+              <div
+                style={{
+                  fontSize: '11px',
+                  color: 'rgba(20, 33, 61, 0.45)',
+                  fontWeight: 600,
+                  marginBottom: '28px',
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Delivery Journey
               </div>
 
               <div className="journey-track">
@@ -238,8 +236,8 @@ export default function HowItWorksSection() {
                           className="journey-connector"
                           style={{
                             background: i < activeStep
-                              ? 'linear-gradient(90deg, #F5821F, #E08C00)'
-                              : 'rgba(90, 40, 0, 0.12)',
+                              ? 'linear-gradient(90deg, var(--orange), var(--orange))'
+                              : 'rgba(20, 33, 61, 0.1)',
                           }}
                         />
                       )}
@@ -247,16 +245,16 @@ export default function HowItWorksSection() {
                         className="journey-node"
                         style={{
                           background: isDone
-                            ? 'linear-gradient(135deg, #F5821F, #FF6B2C)'
-                            : 'rgba(255,255,255,0.9)',
+                            ? 'linear-gradient(135deg, var(--orange), var(--orange))'
+                            : 'rgba(255,253,249,0.95)',
                           border: isDone
-                            ? '2px solid transparent'
-                            : '2px solid rgba(245, 130, 31, 0.25)',
-                          color: isDone ? '#fff' : 'rgba(90, 40, 0, 0.35)',
+                            ? '1px solid transparent'
+                            : '1px solid rgba(252, 163, 17, 0.22)',
+                          color: isDone ? 'var(--white)' : 'rgba(20, 33, 61, 0.35)',
                           boxShadow: isCurrent
-                            ? '0 0 0 5px rgba(245, 130, 31, 0.18)'
+                            ? '0 0 0 4px rgba(252, 163, 17, 0.12)'
                             : 'none',
-                          transform: isCurrent ? 'scale(1.08)' : 'scale(1)',
+                          transform: isCurrent ? 'translateY(-1px)' : 'translateY(0)',
                         }}
                       >
                         {step.num}
@@ -264,8 +262,8 @@ export default function HowItWorksSection() {
                       <div
                         className="journey-label"
                         style={{
-                          color: isDone ? '#1C0F00' : 'rgba(90, 40, 0, 0.4)',
-                          fontWeight: isCurrent ? 700 : 600,
+                          color: isDone ? 'var(--prussian-blue)' : 'rgba(20, 33, 61, 0.4)',
+                          fontWeight: isCurrent ? 600 : 500,
                         }}
                       >
                         {step.title}
@@ -279,19 +277,25 @@ export default function HowItWorksSection() {
             <div
               className={`animate-when-visible ${revealed ? 'is-visible' : ''}`}
               style={{
-                background: 'rgba(255, 255, 255, 0.55)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(255, 255, 255, 0.8)',
-                borderTop: '2px solid rgba(245, 130, 31, 0.25)',
-                borderRadius: '24px',
+                background: 'rgba(255, 253, 249, 0.7)',
+                border: '1px solid rgba(20, 33, 61, 0.08)',
+                borderRadius: 'var(--radius-surface)',
                 padding: '24px',
-                boxShadow: '0 4px 20px rgba(180, 100, 20, 0.07), inset 0 1px 0 rgba(255,255,255,0.9)',
+                boxShadow: '0 2px 16px rgba(20, 33, 61, 0.04)',
                 animationDelay: '0.5s',
               }}
             >
-              <div style={{ fontSize: '13px', color: 'rgba(90, 40, 0, 0.45)', fontWeight: 600, marginBottom: '16px', letterSpacing: '0.05em' }}>
-                AVAILABLE SLOTS TOMORROW
+              <div
+                style={{
+                  fontSize: '11px',
+                  color: 'rgba(20, 33, 61, 0.45)',
+                  fontWeight: 600,
+                  marginBottom: '16px',
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Available Slots Tomorrow
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
                 {[
@@ -305,19 +309,34 @@ export default function HowItWorksSection() {
                   <div
                     key={slot.time}
                     style={{
-                      padding: '10px 8px',
-                      borderRadius: '10px',
+                      padding: '12px 8px',
+                      borderRadius: 'var(--radius-surface)',
                       background: slot.status === 'full'
-                        ? 'rgba(220, 50, 50, 0.08)'
-                        : 'rgba(46, 204, 113, 0.08)',
-                      border: `1px solid ${slot.status === 'full' ? 'rgba(200,50,50,0.2)' : 'rgba(46,204,113,0.2)'}`,
+                        ? 'rgba(220, 50, 50, 0.05)'
+                        : 'rgba(252, 163, 17, 0.06)',
+                      border: `1px solid ${slot.status === 'full' ? 'rgba(0, 0, 0,0.15)' : 'rgba(252, 163, 17,0.16)'}`,
                       textAlign: 'center',
+                      transition: 'opacity 200ms ease, transform 200ms ease',
                     }}
                   >
-                    <div style={{ fontSize: '12px', fontWeight: 700, color: slot.status === 'full' ? 'rgba(200,50,50,0.8)' : '#1C0F00', marginBottom: '3px' }}>
+                    <div
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        color: slot.status === 'full' ? 'rgba(0, 0, 0, 0.75)' : 'var(--prussian-blue)',
+                        marginBottom: '4px',
+                      }}
+                    >
                       {slot.time}
                     </div>
-                    <div style={{ fontSize: '10px', color: slot.status === 'full' ? 'rgba(255,100,100,0.5)' : '#2ECC71', fontWeight: 600 }}>
+                    <div
+                      style={{
+                        fontSize: '10px',
+                        color: slot.status === 'full' ? 'rgba(20, 33, 61, 0.55)' : 'var(--orange)',
+                        fontWeight: 600,
+                        letterSpacing: '0.04em',
+                      }}
+                    >
                       {slot.status === 'full' ? 'Full' : 'Available'}
                     </div>
                   </div>
