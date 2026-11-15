@@ -2,7 +2,10 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { MobileNav } from "@/components/ui/navbar"
+import Header, {
+  MenuToggleIcon,
+  defaultNavItems,
+} from "@/components/ui/curved-menu"
 import { cn } from "@/lib/utils"
 
 interface NavbarProps {
@@ -25,8 +28,15 @@ const navigationLinks = [
 export default function Navbar({ onContactClick }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [appeared, setAppeared] = useState(false)
   const lastY = useRef(0)
   const ticking = useRef(false)
+
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => setAppeared(true))
+    return () => window.cancelAnimationFrame(id)
+  }, [])
 
   useEffect(() => {
     lastY.current = window.scrollY
@@ -34,7 +44,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
     const update = () => {
       const y = Math.max(window.scrollY, 0)
 
-      // At the top, always use the large-gap resting state (image 2)
+      // At the top, always use the large-gap resting state
       if (y <= 8) {
         setScrolled(false)
         setHidden(false)
@@ -46,8 +56,9 @@ export default function Navbar({ onContactClick }: NavbarProps) {
       setScrolled(y > 40)
 
       // Hide once user scrolls down; only reveal again at the very top
+      // Keep navbar visible while the curved menu is open
       const delta = y - lastY.current
-      if (delta > 6) {
+      if (!menuOpen && delta > 6) {
         setHidden(true)
       }
 
@@ -64,7 +75,19 @@ export default function Navbar({ onContactClick }: NavbarProps) {
     update()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  }, [menuOpen])
+
+  useEffect(() => {
+    if (menuOpen) {
+      setHidden(false)
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [menuOpen])
 
   const scrollTo = (href: string) => {
     const id = href.startsWith("#") ? href.slice(1) : href
@@ -79,15 +102,15 @@ export default function Navbar({ onContactClick }: NavbarProps) {
       <nav
         className={cn(
           "navbar",
+          appeared && "navbar-appear",
           scrolled && "navbar-scrolled",
-          hidden && "navbar-hidden",
+          (hidden || menuOpen) && "navbar-hidden",
         )}
         aria-label="Primary"
+        aria-hidden={menuOpen}
       >
         <div className="navbar-inner">
-          <div className="navbar-left">
-            <MobileNav nav={navigationLinks} onNavigate={scrollTo} />
-
+          <div className="navbar-left navbar-anim-item">
             <a
               href="#about"
               className="navbar-logo"
@@ -108,7 +131,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             </a>
           </div>
 
-          <div className="navbar-links">
+          <div className="navbar-links navbar-anim-item delay-100">
             {navigationLinks[0].items.map((link) => (
               <button
                 key={link.href}
@@ -121,7 +144,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             ))}
           </div>
 
-          <div className="navbar-right">
+          <div className="navbar-right navbar-anim-item delay-200">
             <Button
               id="navbar-contact-btn"
               type="button"
@@ -130,9 +153,28 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             >
               Contact Us
             </Button>
+
+            {/* Existing hamburger visual — moved to the right, opens curved menu */}
+            <button
+              type="button"
+              className="navbar-menu-toggle"
+              aria-expanded={menuOpen}
+              aria-label="Toggle Menu"
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <MenuToggleIcon open={menuOpen} />
+            </button>
           </div>
         </div>
       </nav>
+
+      <Header
+        hideTrigger
+        isActive={menuOpen}
+        setIsActive={setMenuOpen}
+        navItems={defaultNavItems}
+        onNavigate={scrollTo}
+      />
     </>
   )
 }

@@ -43,7 +43,8 @@
   --radius-main: 28px;
   --radius-full: 999px;
   --radius-tr: 7px;
-  --radius-surface: var(--radius-main) var(--radius-tr) var(--radius-main) var(--radius-main);
+  --radius-surface: var(--radius-main) var(--radius-tr) var(--radius-main)
+    var(--radius-main);
   /* Explicit px — avoids 999px crushing the 7px top-right on short nav height */
   --radius-navbar: 32px 7px 32px 32px;
 
@@ -786,7 +787,8 @@ body {
   pointer-events: none;
 }
 
-/* Floating navbar island — fixed offset, never jumps at scroll top */
+/* Floating navbar island — fixed offset, never jumps at scroll top.
+   Shell stays in place on load; only inner content animates. */
 .navbar {
   position: fixed;
   top: var(--nav-gap, 16px);
@@ -820,6 +822,46 @@ body {
     box-shadow 240ms ease,
     border-color 240ms ease;
   overflow: visible; /* allow logo pot/flute to hang into hero */
+}
+
+/* Staggered navbar content — short rise that stays inside the pill */
+@keyframes navbarContentIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.navbar-anim-item {
+  opacity: 0;
+}
+
+.navbar.navbar-appear .navbar-anim-item {
+  animation: navbarContentIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.navbar.navbar-appear .navbar-anim-item.delay-100 {
+  animation-delay: 0.08s;
+}
+
+.navbar.navbar-appear .navbar-anim-item.delay-200 {
+  animation-delay: 0.16s;
+}
+
+.navbar.navbar-appear .navbar-anim-item.delay-300 {
+  animation-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-anim-item {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 .navbar-scrolled {
@@ -929,21 +971,56 @@ body {
 }
 
 .navbar-right {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 8px;
   flex: 1;
 }
 
 .navbar-cta {
+  display: none;
   white-space: nowrap;
   margin-bottom: 0 !important;
 }
 
+/* Existing hamburger — right side of navbar */
+.navbar-menu-toggle {
+  appearance: none;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  cursor: pointer;
+  color: var(--prussian-blue);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.navbar-menu-toggle:hover {
+  background: rgba(20, 33, 61, 0.04);
+}
+
+.navbar-menu-toggle:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
 @media (min-width: 768px) {
-  .navbar-links,
-  .navbar-right {
+  .navbar-links {
     display: flex;
+  }
+
+  .navbar-cta {
+    display: inline-flex;
+  }
+
+  .navbar-menu-toggle {
+    display: none;
   }
 }
 
@@ -985,7 +1062,12 @@ body {
 }
 
 .gradient-text-white {
-  background: linear-gradient(135deg, var(--white), var(--orange), var(--orange));
+  background: linear-gradient(
+    135deg,
+    var(--white),
+    var(--orange),
+    var(--orange)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1062,7 +1144,12 @@ body {
   padding: 28px 28px 22px;
   max-height: none;
   overflow: visible;
-  background: linear-gradient(160deg, var(--prussian-blue) 0%, var(--prussian-blue) 50%, var(--black) 100%);
+  background: linear-gradient(
+    160deg,
+    var(--prussian-blue) 0%,
+    var(--prussian-blue) 50%,
+    var(--black) 100%
+  );
   border: 1px solid rgba(255, 255, 255, 0.28);
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.35),
@@ -1445,8 +1532,8 @@ body {
   margin-left: 16px;
   padding: 6px 14px;
   border-radius: var(--radius-surface);
-  background: rgba(252, 163, 17, 0.08);
-  border: 1px solid rgba(252, 163, 17, 0.22);
+  background: rgba(252, 163, 17, 0.18);
+  border: 1px solid rgba(252, 163, 17, 0.4);
   color: var(--orange);
   font-size: 11px;
   font-weight: 600;
@@ -1465,10 +1552,42 @@ body {
   box-shadow: 0 0 0 3px rgba(252, 163, 17, 0.15);
 }
 
+/* LinkedIn icon — matches Coming Soon pill treatment */
+.hero-linkedin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: auto;
+  height: auto;
+  margin-left: 16px;
+  margin-right: 0;
+  padding: 6px 10px;
+  border-radius: var(--radius-surface);
+  background: rgba(252, 163, 17, 0.18);
+  border: 1px solid rgba(252, 163, 17, 0.4);
+  color: var(--orange);
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.hero-linkedin-icon:hover {
+  background: rgba(252, 163, 17, 0.28);
+  border-color: rgba(252, 163, 17, 0.55);
+  color: var(--orange);
+}
+
 .hero-phone {
   width: 288px;
   max-width: 100%;
-  background: linear-gradient(165deg, var(--prussian-blue) 0%, var(--black) 100%);
+  background: linear-gradient(
+    165deg,
+    var(--prussian-blue) 0%,
+    var(--black) 100%
+  );
   border: 1px solid rgba(252, 163, 17, 0.28);
   border-radius: var(--radius-surface);
   padding: 16px;
@@ -1591,6 +1710,11 @@ body {
     display: inline-flex;
     margin: 12px 0 0;
     margin-left: 0;
+  }
+
+  .hero-linkedin-icon {
+    display: inline-flex;
+    margin: 12px 8px 0 0;
   }
 
   .hero-phone-wrap {

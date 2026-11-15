@@ -51,6 +51,10 @@ export default function TeamSectionDemo() {
       imageShiftY: -4,
       imageShiftX: 1,
       socialLinks: [
+        {
+          icon: Linkedin,
+          href: "https://www.linkedin.com/in/sarthak-kumar-6568a1199/",
+        },
         { icon: Instagram, href: "https://www.instagram.com/johnn274/" },
       ],
     },

@@ -92,17 +92,56 @@ export default function HeroSection({
             Fresh Dairy,
             <br />
             <span className="gradient-text">Delivered Daily</span>
+            <a
+              href="https://www.linkedin.com/company/murlimadhav/home"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-linkedin-icon"
+              id="hero-linkedin-icon"
+              aria-label="Visit MurliMadhav on LinkedIn"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect width="4" height="12" x="2" y="9" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </a>
             <span className="coming-soon-badge">
               <span className="coming-soon-dot" />
               Coming Soon
             </span>
           </h1>
 
+          <p
+            className="animate-when-visible delay-200"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(18px, 2.5vw, 26px)",
+              fontWeight: 500,
+              color: "var(--prussian-blue)",
+              marginBottom: "12px",
+              lineHeight: 1.35,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Fresh mornings start with pure choices
+          </p>
+
           <h2
             className="animate-when-visible delay-200"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(18px, 2.5vw, 28px)",
+              fontSize: "clamp(16px, 2vw, 22px)",
               fontWeight: 400,
               color: "rgba(20, 33, 61, 0.6)",
               marginBottom: "28px",
@@ -421,7 +460,8 @@ export default function HeroSection({
               <div
                 style={{
                   padding: "6px 12px",
-                  background: "linear-gradient(135deg, var(--orange), var(--orange))",
+                  background:
+                    "linear-gradient(135deg, var(--orange), var(--orange))",
                   borderRadius: "var(--radius-surface)",
                   fontSize: "11px",
                   fontWeight: 600,
@@ -443,7 +483,9 @@ export default function HeroSection({
                 justifyContent: "space-between",
               }}
             >
-              <div style={{ fontSize: "12px", color: "rgba(229, 229, 229,0.55)" }}>
+              <div
+                style={{ fontSize: "12px", color: "rgba(229, 229, 229,0.55)" }}
+              >
                 Total
               </div>
               <div
