@@ -162,7 +162,8 @@ export default function Navbar({ onContactClick }: NavbarProps) {
               aria-label="Toggle Menu"
               onClick={() => setMenuOpen((v) => !v)}
             >
-              <MenuToggleIcon open={menuOpen} />
+              {/* Keep burger icon — close lives inside the curved panel */}
+              <MenuToggleIcon open={false} />
             </button>
           </div>
         </div>

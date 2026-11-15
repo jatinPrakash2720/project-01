@@ -1031,10 +1031,17 @@ body {
     transition: none !important;
   }
 
-  .navbar-hidden {
+  /* Scroll-hide can stay visible under reduced motion, but menu-open must hide */
+  .navbar-hidden:not([aria-hidden="true"]) {
     transform: none;
     opacity: 1;
     pointer-events: auto;
+  }
+
+  .navbar[aria-hidden="true"] {
+    transform: translate3d(0, -130%, 0) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }
 

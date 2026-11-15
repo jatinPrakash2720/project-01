@@ -128,7 +128,7 @@ const NavLink: React.FC<iNavLinkProps> = ({
               staggerChildren: 0.075,
               delayChildren: 0.25,
             }}
-            className="relative z-10 block text-[1.75rem] font-bold tracking-tight text-[var(--prussian-blue)] transition-colors duration-500 group-hover:text-[var(--orange)] md:text-[2.15rem]"
+            className="relative z-10 block whitespace-nowrap text-[2.35rem] font-bold tracking-tight text-[var(--prussian-blue)] transition-colors duration-500 group-hover:text-[var(--orange)] md:text-[3rem]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {heading.split("").map((letter, i) => {
@@ -205,22 +205,21 @@ export const CurvedNavbar: React.FC<iCurvedNavbarProps> = ({
       initial="initial"
       animate="enter"
       exit="exit"
-      className="fixed top-0 right-0 z-[200] h-[100dvh] w-[min(82vw,24rem)] bg-[var(--white)] shadow-[-12px_0_40px_rgba(20,33,61,0.12)]"
+      className="fixed top-0 right-0 z-[200] h-[100dvh] w-[min(92vw,28rem)] bg-[var(--white)] shadow-[-12px_0_40px_rgba(20,33,61,0.12)]"
     >
-      {/* Close control lives in the sidebar — navbar is hidden while open */}
-      <button
-        type="button"
-        onClick={() => setIsActive(false)}
-        aria-label="Close menu"
-        className="absolute top-5 right-5 z-[210] flex h-11 w-11 items-center justify-center rounded-full border border-[var(--prussian-blue)]/15 bg-[var(--white)] text-[var(--prussian-blue)] transition-colors hover:border-[var(--orange)] hover:bg-[var(--orange)] hover:text-[var(--black)]"
-      >
-        <MenuToggleIcon open />
-      </button>
+      <div className="relative z-10 flex h-full flex-col px-6 sm:px-8">
+        <button
+          type="button"
+          onClick={() => setIsActive(false)}
+          aria-label="Close menu"
+          className="absolute top-6 right-6 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--prussian-blue)]/15 bg-[var(--white)] text-[var(--prussian-blue)] transition-colors hover:border-[var(--orange)] hover:bg-[var(--orange)] hover:text-[var(--black)] sm:top-8 sm:right-8"
+        >
+          <MenuToggleIcon open />
+        </button>
 
-      <div className="flex h-full flex-col justify-between pt-20">
-        <div className="mt-0 flex flex-col gap-1 px-6 sm:px-10 md:px-16">
-          <section className="mt-0 bg-transparent">
-            <div className="mx-auto max-w-7xl">
+        <div className="flex min-h-0 flex-1 flex-col items-center justify-center pt-16">
+          <section className="w-full bg-transparent">
+            <div className="flex w-full flex-col items-center text-center">
               {navItems.map((item, index) => {
                 return (
                   <NavLink
@@ -234,8 +233,8 @@ export const CurvedNavbar: React.FC<iCurvedNavbarProps> = ({
               })}
             </div>
           </section>
+          {footer}
         </div>
-        {footer}
       </div>
       <Curve />
     </motion.div>
