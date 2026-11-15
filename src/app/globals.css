@@ -1524,12 +1524,20 @@ body {
   line-height: 1.05;
 }
 
-.coming-soon-badge {
+.hero-heading-tags {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   vertical-align: middle;
   margin-left: 16px;
+}
+
+.coming-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  vertical-align: middle;
+  margin-left: 0;
   padding: 6px 14px;
   border-radius: var(--radius-surface);
   background: rgba(252, 163, 17, 0.18);
@@ -1560,7 +1568,7 @@ body {
   vertical-align: middle;
   width: auto;
   height: auto;
-  margin-left: 16px;
+  margin-left: 0;
   margin-right: 0;
   padding: 6px 10px;
   border-radius: var(--radius-surface);
@@ -1706,15 +1714,22 @@ body {
     font-size: clamp(42px, 11vw, 58px);
   }
 
-  .coming-soon-badge {
-    display: inline-flex;
+  .hero-heading-tags {
+    display: flex;
+    width: 100%;
     margin: 12px 0 0;
     margin-left: 0;
+    gap: 8px;
+  }
+
+  .coming-soon-badge {
+    display: inline-flex;
+    margin: 0;
   }
 
   .hero-linkedin-icon {
     display: inline-flex;
-    margin: 12px 8px 0 0;
+    margin: 0;
   }
 
   .hero-phone-wrap {

@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 function LinkedinIcon({ className }: { className?: string }) {
   return (
@@ -19,7 +19,11 @@ function LinkedinIcon({ className }: { className?: string }) {
   )
 }
 
-export default function Footer({ onContactClick }: { onContactClick: () => void }) {
+export default function Footer({
+  onContactClick,
+}: {
+  onContactClick: () => void
+}) {
   return (
     <footer
       className="site-footer"
@@ -291,5 +295,3 @@ export default function Footer({ onContactClick }: { onContactClick: () => void 
     </footer>
   )
 }
-
-

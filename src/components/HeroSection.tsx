@@ -92,33 +92,35 @@ export default function HeroSection({
             Fresh Dairy,
             <br />
             <span className="gradient-text">Delivered Daily</span>
-            <a
-              href="https://www.linkedin.com/company/murlimadhav/home"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hero-linkedin-icon"
-              id="hero-linkedin-icon"
-              aria-label="Visit MurliMadhav on LinkedIn"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="14"
-                height="14"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
+            <span className="hero-heading-tags">
+              <a
+                href="https://www.linkedin.com/company/murlimadhav/home"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-linkedin-icon"
+                id="hero-linkedin-icon"
+                aria-label="Visit MurliMadhav on LinkedIn"
               >
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                <rect width="4" height="12" x="2" y="9" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-            </a>
-            <span className="coming-soon-badge">
-              <span className="coming-soon-dot" />
-              Coming Soon
+                <svg
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                  <rect width="4" height="12" x="2" y="9" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </a>
+              <span className="coming-soon-badge">
+                <span className="coming-soon-dot" />
+                Coming Soon
+              </span>
             </span>
           </h1>
 
